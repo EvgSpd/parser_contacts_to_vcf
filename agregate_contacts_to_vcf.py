@@ -65,11 +65,11 @@ def parse_excel(path='result.xls') -> tuple:       #->list:
         _ld.extend( [{'first_name': k[2].strip(),
                     'last_name': k[1].strip(),
                     'id': (k[2].strip()+' '+k[1].strip()), #.strip(),
-                    'phone_number':  ''.join(re.findall(r'(^\+|\d)', k[3] )),  # re.sub(r'^8', '+', 
+                    'phone_number':  ''.join(re.findall(r'(^\+|\d)', ph_number )),  # re.sub(r'^8', '+', 
                    } for ph_number in k[3].split(';') ]  )
             
     print(f'excel have {df.shape[0]}  notes, was chosen  {len(_ld)} contacts')
-    return (_ld , list(df['phone_number']) ) 
+    return (_ld , [k['phone_number'] for k in _ld] ) ) 
 
 def compare(_lt)->str:
     t=list(filter(None, _lt))
